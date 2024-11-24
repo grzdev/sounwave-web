@@ -22,23 +22,22 @@ function SpotifyAuths({ onDataFetched }) {
     }
   }, []);
 
-  // Function to fetch data from Spotify API
-  const fetchSpotifyData = async (endpoint) => {
-    try {
-      const response = await fetch(`${API_ENDPOINT}${endpoint}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return response.json();
-    } catch (error) {
-      console.error("Error fetching Spotify data:", error);
-      return null;
-    }
-  };
-
   // Fetch and process Spotify data
   useEffect(() => {
+    const fetchSpotifyData = async (endpoint) => {
+      try {
+        const response = await fetch(`${API_ENDPOINT}${endpoint}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        return response.json();
+      } catch (error) {
+        console.error("Error fetching Spotify data:", error);
+        return null;
+      }
+    };
+
     if (accessToken) {
       const fetchData = async () => {
         const recentlyPlayed = await fetchSpotifyData(

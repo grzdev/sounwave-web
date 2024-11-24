@@ -129,7 +129,14 @@ function Metrics() {
                     alt={`${genre}`}
                     className="w-[10rem] h-[12rem] rounded-xl"
                   />
-                  <h1 className="text-[1.1rem] font-bold">{genre}</h1>
+                  <h1 className="text-[1.1rem] font-bold">
+                    {genre
+                      .split(" ")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </h1>
                 </div>
               ))}
             </div>
