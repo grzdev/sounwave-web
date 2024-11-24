@@ -87,9 +87,11 @@ function SpotifyAuths({ onDataFetched }) {
     <div>
       {!accessToken && (
         <a href={getLoginURL()}>
-          <button className="w-[15rem] h-[5rem] bg-[#212328] hover:bg-[#31343c] flex flex-row gap-[0.7rem] items-center justify-center rounded-xl transition duration-300 ease-in ">
-            <h1 className="text-[1.1rem] font-bold text-white">login with</h1>
-            <h1 className="text-[1.4rem]">
+          <button className="w-[13rem] h-[4.5rem] md:w-[15rem] md:h-[5rem] bg-[#212328] hover:bg-[#31343c] flex flex-row gap-[0.7rem] items-center justify-center rounded-xl transition duration-300 ease-in ">
+            <h1 className="text-[1rem] md:text-[1.1rem] font-bold text-white">
+              login with
+            </h1>
+            <h1 className="text-[1.2rem] md:text-[1.4rem]">
               <Icon icon="logos:spotify" />
             </h1>
           </button>

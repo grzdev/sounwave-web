@@ -20,17 +20,19 @@ function Metrics() {
     <div className="bg-black text-white w-full py-[2rem] flex flex-col">
       {/* Page Header */}
       <div className="flex items-center justify-center">
-        <h1 className="text-center text-[3rem] font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
+        <h1 className="text-center text-[2rem] md:text-[3rem] font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
           Your metrics
         </h1>
       </div>
 
       {/* Top Tracks Section */}
       {spotifyData ? (
-        <div className="flex flex-col gap-[3rem] mb-[8rem] px-[4rem]">
+        <div className="flex flex-col gap-[3rem] mt-[2rem] mb-[8rem] px-[2rem] md:px-[4rem]">
           <div className="flex w-full flex-col">
-            <h1 className="text-[1.8rem] text-start font-bold">Top Songs</h1>
-            <p className="text-[1.2rem] font-semibold text-gray-300">
+            <h1 className="text-[1.5rem] md:text-[1.8rem] text-start font-bold">
+              Top Songs
+            </h1>
+            <p className="text-[1rem] md:text-[1.2rem] font-semibold text-gray-300">
               Your top songs from the past month
             </p>
 
@@ -58,8 +60,10 @@ function Metrics() {
           </div>
 
           <div className="flex w-full flex-col">
-            <h1 className="text-[1.8rem] text-start font-bold">Top Artists</h1>
-            <p className="text-[1.2rem] font-semibold text-gray-300">
+            <h1 className="text-[1.5rem] md:text-[1.8rem] text-start font-bold">
+              Top Artists
+            </h1>
+            <p className="text-[1rem] md:text-[1.2rem] font-semibold text-gray-300">
               Your most listened to artists from the past month
             </p>
 
@@ -84,10 +88,10 @@ function Metrics() {
           </div>
 
           <div className="flex w-full flex-col">
-            <h1 className="text-[1.8rem] text-start font-bold">
+            <h1 className="text-[1.5rem] md:text-[1.8rem] text-start font-bold">
               Recently Played Songs
             </h1>
-            <p className="text-[1.2rem] font-semibold text-gray-300">
+            <p className="text-[1rem] md:text-[1.2rem] font-semibold text-gray-300">
               Songs you played recently
             </p>
 
@@ -112,8 +116,10 @@ function Metrics() {
           </div>
 
           <div className="flex w-full flex-col">
-            <h1 className="text-[1.8rem] text-start font-bold">Top Genres</h1>
-            <p className="text-[1.2rem] font-semibold text-gray-300">
+            <h1 className="text-[1.5rem] md:text-[1.8rem] text-start font-bold">
+              Top Genres
+            </h1>
+            <p className="text-[1rem] md:text-[1.2rem] font-semibold text-gray-300">
               The genres you resonate with the most
             </p>
 

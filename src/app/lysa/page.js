@@ -1,8 +1,8 @@
 "use client";
 
-import AudioRecorder from "@/components/AudioRecorder";
-import RecordingButton from "@/components/RecordingButton";
-import SongInfo from "@/components/SongDiv";
+import AudioRecorder from "@/app/components/AudioRecorder";
+import RecordingButton from "@/app/components/RecordingButton";
+import SongInfo from "@/app/components/SongDiv";
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
 
