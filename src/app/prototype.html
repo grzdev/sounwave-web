@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify Music App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+      }
+      a.button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 20px 0;
+        background-color: #1db954;
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+      }
+      a.button:hover {
+        background-color: #1aa34a;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Spotify Music App</h1>
+    <div id="content">
+      <a id="login-button" class="button" href="#">Log in with Spotify</a>
+      <div id="user-data" style="display: none">
+        <h2>Your Spotify Data</h2>
+        <ul>
+          <li>
+            <strong>Recently Played Tracks:</strong>
+            <span id="recently-played"></span>
+          </li>
+          <li>
+            <strong>Top Tracks of the Month:</strong>
+            <span id="top-tracks-month"></span>
+          </li>
+          <li><strong>Top Artists:</strong> <span id="top-artists"></span></li>
+          <li><strong>Top Genres:</strong> <span id="top-genres"></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const CLIENT_ID = "088e5d429e7d4ce08988f59876038526";
+      const REDIRECT_URI =
+        "http://musicproject4.s3-website.eu-west-3.amazonaws.com/callback";
+      const SCOPES = "user-read-recently-played user-top-read";
+
+      const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+      const API_ENDPOINT = "https://api.spotify.com/v1";
+      let accessToken = "";
+
+      // Function to generate the login URL
+      function getLoginURL() {
+        return `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
+          REDIRECT_URI
+        )}&scope=${encodeURIComponent(SCOPES)}`;
+      }
+
+      // Function to extract the access token from the URL hash
+      function getAccessTokenFromURL() {
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        return params.get("access_token");
+      }
+
+      // Function to fetch data from Spotify API
+      async function fetchSpotifyData(endpoint) {
+        try {
+          const response = await fetch(`${API_ENDPOINT}${endpoint}`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+          return response.json();
+        } catch (error) {
+          console.error("Error fetching Spotify data:", error);
+          return null;
+        }
+      }
+
+      // Function to display Spotify data
+      async function displaySpotifyData() {
+        const recentlyPlayed = await fetchSpotifyData(
+          "/me/player/recently-played?limit=5"
+        );
+        const topTracks = await fetchSpotifyData(
+          "/me/top/tracks?time_range=short_term&limit=5"
+        );
+        const topArtists = await fetchSpotifyData("/me/top/artists?limit=5");
+
+        if (recentlyPlayed && topTracks && topArtists) {
+          document.getElementById("recently-played").innerText =
+            recentlyPlayed.items.map((item) => item.track.name).join(", ");
+          document.getElementById("top-tracks-month").innerText =
+            topTracks.items.map((track) => track.name).join(", ");
+          document.getElementById("top-artists").innerText = topArtists.items
+            .map((artist) => artist.name)
+            .join(", ");
+          document.getElementById("top-genres").innerText = topArtists.items
+            .flatMap((artist) => artist.genres)
+            .slice(0, 5)
+            .join(", ");
+
+          document.getElementById("user-data").style.display = "block";
+        } else {
+          alert("Failed to load Spotify data. Please try again.");
+        }
+      }
+
+      // Handle page load
+      window.onload = function () {
+        const token = getAccessTokenFromURL();
+        if (token) {
+          accessToken = token;
+          window.location.hash = "";
+          displaySpotifyData();
+        } else {
+          document.getElementById("login-button").href = getLoginURL();
+        }
+      };
+    </script>
+  </body>
+</html>
