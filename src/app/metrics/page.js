@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import SpotifyAuths from "../components/spotifyAuths";
 import Navbar from "../components/navbar";
 import Image from "next/image";
-import Genre1 from "../assets/images/genre1.jpg";
-import Genre2 from "../assets/images/genre2.jpg";
-import Genre3 from "../assets/images/genre3.jpg";
-import Genre4 from "../assets/images/genre4.jpg";
-import Genre5 from "../assets/images/genre5.jpg";
+import Genre1 from "../assets/images/genre1.JPG";
+import Genre2 from "../assets/images/genre2.JPG";
+import Genre3 from "../assets/images/genre3.JPG";
+import Genre4 from "../assets/images/genre4.JPG";
+import Genre5 from "../assets/images/genre5.JPG";
 
 function Metrics() {
   const [spotifyData, setSpotifyData] = useState(null);
