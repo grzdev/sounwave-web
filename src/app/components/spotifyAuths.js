@@ -2,11 +2,16 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 
-const CLIENT_ID = "5bcca6b883264779b8d171252699e684";
-const REDIRECT_URI = "http://localhost:3000/metrics"; // Adjust based on your Next.js app URL
-const SCOPES = "user-read-recently-played user-top-read";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const API_ENDPOINT = "https://api.spotify.com/v1";
+const CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+const SCOPES = process.env.NEXT_PUBLIC_SPOTIFY_SCOPES;
+const AUTH_ENDPOINT = process.env.NEXT_PUBLIC_SPOTIFY_AUTH_ENDPOINT;
+const API_ENDPOINT = process.env.NEXT_PUBLIC_SPOTIFY_API_ENDPOINT;
+
+// Dynamically choose the redirect URI based on the environment
+const REDIRECT_URI =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI_PROD
+    : process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI;
 
 function SpotifyAuths({ onDataFetched }) {
   const [accessToken, setAccessToken] = useState("");
