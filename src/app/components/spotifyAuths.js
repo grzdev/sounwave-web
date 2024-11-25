@@ -16,18 +16,27 @@ const REDIRECT_URI =
 function SpotifyAuths({ onDataFetched }) {
   const [accessToken, setAccessToken] = useState("");
 
-  // Extract the token from the URL
+  // Extract the token from the URL and validate it
   useEffect(() => {
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
     const token = params.get("access_token");
+
     if (token) {
+      // Save the token to state and localStorage
       setAccessToken(token);
+      localStorage.setItem("spotify_access_token", token);
       window.location.hash = ""; // Clean up URL
+    } else {
+      // Attempt to retrieve token from localStorage
+      const storedToken = localStorage.getItem("spotify_access_token");
+      if (storedToken) {
+        setAccessToken(storedToken);
+      }
     }
   }, []);
 
-  // Fetch and process Spotify data
+  // Fetch Spotify data securely and handle errors
   useEffect(() => {
     const fetchSpotifyData = async (endpoint) => {
       try {
@@ -36,7 +45,15 @@ function SpotifyAuths({ onDataFetched }) {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        return response.json();
+
+        // Check if the response is valid JSON
+        if (response.ok) {
+          return await response.json();
+        } else {
+          const errorText = await response.text();
+          console.error("Spotify API Error:", errorText);
+          throw new Error("Failed to fetch Spotify data. Please log in again.");
+        }
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
         return null;
@@ -45,35 +62,42 @@ function SpotifyAuths({ onDataFetched }) {
 
     if (accessToken) {
       const fetchData = async () => {
-        const recentlyPlayed = await fetchSpotifyData(
-          "/me/player/recently-played?limit=5"
-        );
-        const topTracks = await fetchSpotifyData(
-          "/me/top/tracks?time_range=short_term&limit=5"
-        );
-        const topArtists = await fetchSpotifyData("/me/top/artists?limit=5");
+        try {
+          const recentlyPlayed = await fetchSpotifyData(
+            "/me/player/recently-played?limit=5"
+          );
+          const topTracks = await fetchSpotifyData(
+            "/me/top/tracks?time_range=short_term&limit=5"
+          );
+          const topArtists = await fetchSpotifyData("/me/top/artists?limit=5");
 
-        if (recentlyPlayed && topTracks && topArtists) {
-          onDataFetched({
-            recentlyPlayed: recentlyPlayed.items.map((item) => ({
-              name: item.track.name,
-              albumCover: item.track.album.images[0]?.url,
-            })),
-            topTracks: topTracks.items.map((track) => ({
-              name: track.name,
-              albumCover: track.album.images[0]?.url,
-              artists: track.artists.map((artist) => artist.name),
-            })),
-            topArtists: topArtists.items.map((artist) => ({
-              name: artist.name,
-              image: artist.images[0]?.url,
-            })),
-            topGenres: topArtists.items
-              .flatMap((artist) => artist.genres)
-              .slice(0, 5),
-          });
-        } else {
-          console.error("Failed to fetch Spotify data");
+          if (recentlyPlayed && topTracks && topArtists) {
+            onDataFetched({
+              recentlyPlayed: recentlyPlayed.items.map((item) => ({
+                name: item.track.name,
+                albumCover: item.track.album.images[0]?.url,
+              })),
+              topTracks: topTracks.items.map((track) => ({
+                name: track.name,
+                albumCover: track.album.images[0]?.url,
+                artists: track.artists.map((artist) => artist.name),
+              })),
+              topArtists: topArtists.items.map((artist) => ({
+                name: artist.name,
+                image: artist.images[0]?.url,
+              })),
+              topGenres: topArtists.items
+                .flatMap((artist) => artist.genres)
+                .slice(0, 5),
+            });
+          } else {
+            console.error("Failed to fetch Spotify data");
+          }
+        } catch (error) {
+          console.error("Error in fetchData:", error);
+          alert("Session expired or invalid. Please log in again.");
+          localStorage.removeItem("spotify_access_token");
+          window.location.href = getLoginURL();
         }
       };
 
