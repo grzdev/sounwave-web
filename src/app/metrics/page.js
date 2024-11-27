@@ -99,10 +99,10 @@ function Metrics() {
   }, [accessToken]);
 
   return (
-    <div className="bg-black text-white w-full py-[2rem] flex flex-col overflow-x-auto md:justify-center md:items-center">
+    <div className="bg-black text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
       <div className="flex items-center justify-center w-full md:w-[70rem]">
         {userInfo && (
-          <div className="flex w-full justify-between items-center px-[1rem] md:px-[0rem]">
+          <div className="flex w-full justify-between items-center px-[1rem] md:px-[3rem]">
             <Image
               src={userInfo.images?.[0]?.url || "/default-profile.png"}
               alt="Profile"
@@ -111,7 +111,7 @@ function Metrics() {
               height={60}
               cl
             />
-            <h1 className="text-center text-[1.7rem] md:text-[3rem] font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-center text-[1.7rem] md:text-[2.5rem] font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
               {userInfo.display_name || "Your"}&apos;s metrics
             </h1>
           </div>
@@ -122,7 +122,7 @@ function Metrics() {
           <Loader />
         </div>
       ) : spotifyData ? (
-        <div className="flex flex-col gap-[2rem] mt-[2rem] md:mt-[5rem] mb-[8rem] px-[1rem] md:px-[14rem]">
+        <div className="flex flex-col gap-[2rem] mt-[2rem] md:mt-[4rem] mb-[8rem] px-[1rem] md:px-[14rem]">
           <TopTracks topTracks={spotifyData.topTracks} />
           <TopArtists topArtists={spotifyData.topArtists} />
           <RecentlyPlayed recentlyPlayed={spotifyData.recentlyPlayed} />
