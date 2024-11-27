@@ -36,7 +36,7 @@ function SpotifyAuths({ onDataFetched }) {
     }
   }, []);
 
-  // Fetch Spotify data securely and handle errors
+  // Validate and fetch Spotify data securely
   useEffect(() => {
     const fetchSpotifyData = async (endpoint) => {
       try {
@@ -46,13 +46,10 @@ function SpotifyAuths({ onDataFetched }) {
           },
         });
 
-        // Check if the response is valid JSON
         if (response.ok) {
           return await response.json();
         } else {
-          const errorText = await response.text();
-          console.error("Spotify API Error:", errorText);
-          throw new Error("Failed to fetch Spotify data. Please log in again.");
+          throw new Error("Failed to fetch Spotify data.");
         }
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
@@ -95,9 +92,8 @@ function SpotifyAuths({ onDataFetched }) {
           }
         } catch (error) {
           console.error("Error in fetchData:", error);
-          alert("Session expired or invalid. Please log in again.");
           localStorage.removeItem("spotify_access_token");
-          window.location.href = getLoginURL();
+          setAccessToken(""); // Clear access token state
         }
       };
 
@@ -114,18 +110,16 @@ function SpotifyAuths({ onDataFetched }) {
 
   return (
     <div>
-      {!accessToken && (
-        <a href={getLoginURL()}>
-          <button className="w-[13rem] h-[4.5rem] md:w-[15rem] md:h-[5rem] bg-[#212328] hover:bg-[#31343c] flex flex-row gap-[0.7rem] items-center justify-center rounded-xl transition duration-300 ease-in ">
-            <h1 className="text-[1rem] md:text-[1.1rem] font-bold text-white">
-              login with
-            </h1>
-            <h1 className="text-[1.2rem] md:text-[1.4rem]">
-              <Icon icon="logos:spotify" />
-            </h1>
-          </button>
-        </a>
-      )}
+      <a href={getLoginURL()}>
+        <button className="w-[13rem] h-[4.5rem] md:w-[15rem] md:h-[5rem] bg-[#212328] hover:bg-[#31343c] flex flex-row gap-[0.7rem] items-center justify-center rounded-xl transition duration-300 ease-in ">
+          <h1 className="text-[1rem] md:text-[1.1rem] font-bold text-white">
+            {accessToken ? "Go to Metrics" : "Login with"}
+          </h1>
+          <h1 className="text-[1.2rem] md:text-[1.4rem]">
+            <Icon icon="logos:spotify" />
+          </h1>
+        </button>
+      </a>
     </div>
   );
 }
