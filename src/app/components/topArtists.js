@@ -22,6 +22,7 @@ function TopArtists({ topArtists }) {
               width={200}
               height={200}
               className="rounded-xl"
+              priority
             />
             <h1 className="text-[1rem] md:text-[1.1rem] font-bold">
               {artist.name}

@@ -29,6 +29,7 @@ function TopGenres({ topGenres }) {
               src={shuffledImages[index % shuffledImages.length]}
               alt={`${genre}`}
               className="w-[10rem] h-[12rem] rounded-xl"
+              priority
             />
             <h1 className="text-[1rem] md:text-[1.1rem] font-bold">
               {genre

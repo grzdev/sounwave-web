@@ -22,6 +22,7 @@ function TopTracks({ topTracks }) {
               width={160}
               height={160}
               className="rounded-xl"
+              priority
             />
             <h1 className="text-[1rem] md:text-[1.3rem] font-bold mt-[1rem] md:mt-[1.5rem]">
               {track.name}

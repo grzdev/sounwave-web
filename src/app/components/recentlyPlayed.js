@@ -14,7 +14,7 @@ function RecentlyPlayed({ recentlyPlayed }) {
         {recentlyPlayed.map((track, index) => (
           <div
             key={index}
-            className="flex flex-col items-start w-[11rem] gap-[1.5rem] shrink-0"
+            className="flex flex-col items-start w-[11rem] gap-[0.6rem] md:gap-[1.5rem] shrink-0"
           >
             <Image
               src={track.albumCover}
@@ -22,6 +22,7 @@ function RecentlyPlayed({ recentlyPlayed }) {
               width={160}
               height={160}
               className="rounded-xl"
+              priority
             />
             <h1 className="text-[1rem] md:text-[1.1rem] font-bold">
               {track.name}
