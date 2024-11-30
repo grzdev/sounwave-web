@@ -8,6 +8,7 @@ import RecentlyPlayed from "../components/recentlyPlayed";
 import TopGenres from "../components/topGenres";
 import Loader from "../components/loader";
 import Image from "next/image";
+import Modal from "../components/Modal";
 
 const API_ENDPOINT = process.env.NEXT_PUBLIC_SPOTIFY_API_ENDPOINT;
 
@@ -111,14 +112,16 @@ function Metrics() {
               height={60}
               cl
             />
+
             <h1 className="text-center text-[1.7rem] md:text-[2.5rem] font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
               {userInfo.display_name || "Your"}&apos;s metrics
             </h1>
           </div>
         )}
       </div>
+
       {loading ? (
-        <div className="w-full flex px-[1rem] py-[2rem] md:px-[8rem] md:py-[3rem]">
+        <div className="w-full flex justify-center items-center py-[2rem] ] md:py-[5rem]">
           <Loader />
         </div>
       ) : spotifyData ? (

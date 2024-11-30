@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import Modal from "./Modal";
 
 function TopTracks({ topTracks }) {
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (track) => {
+    setSelectedTrack(track);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedTrack(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="flex w-full flex-col">
       <h1 className="text-[1.3rem] md:text-[1.8rem] text-start font-bold">
@@ -14,7 +28,8 @@ function TopTracks({ topTracks }) {
         {topTracks.map((track, index) => (
           <div
             key={index}
-            className="flex flex-col items-start w-[11rem] shrink-0"
+            className="flex flex-col items-start w-[11rem] shrink-0 cursor-pointer"
+            onClick={() => openModal(track)}
           >
             <Image
               src={track.albumCover}
@@ -33,6 +48,26 @@ function TopTracks({ topTracks }) {
           </div>
         ))}
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {selectedTrack && (
+          <div className="flex flex-col items-center">
+            <Image
+              src={selectedTrack.albumCover}
+              alt={`${selectedTrack.name} album cover`}
+              width={200}
+              height={200}
+              className="rounded-xl"
+            />
+            <h1 className="text-[1.5rem] font-bold mt-4">
+              {selectedTrack.name}
+            </h1>
+            <h2 className="text-[1rem] text-gray-200 font-medium">
+              {selectedTrack.artists.join(", ")}
+            </h2>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

@@ -1,10 +1,9 @@
 "use client";
 
-import AudioRecorder from "@/app/components/AudioRecorder";
-import RecordingButton from "@/app/components/RecordingButton";
-import SongInfo from "@/app/components/SongDiv";
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
+import RecordingButton from "../components/RecordingButton";
+import SongInfo from "../components/SongDiv";
 
 function Lysa() {
   const [icon, setIcon] = useState("lucide:ear");
