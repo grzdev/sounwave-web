@@ -10,7 +10,7 @@ function Navbar() {
   const isActive = (path) => pathname === path;
 
   return (
-    <div className="w-[12rem] h-[5rem] md:w-[14rem] md:h-[6rem] flex justify-between items-center px-[1.4rem] mb-[1.5rem] bg-[#1D1F24] rounded-[1.5rem] transition ease-in duration-300 cursor-pointer">
+    <div className="w-[12rem] h-[5rem] md:w-[14rem] md:h-[6rem] flex justify-between items-center px-[1.4rem] mb-[1.5rem] md:mb-[0.5rem] bg-[#1D1F24] rounded-[1.5rem] transition ease-in duration-300 cursor-pointer">
       <Link href="/metrics">
         <div
           className={`w-[4rem] h-[3.5rem] md:w-[5rem] md:h-[4rem] rounded-[1rem] flex justify-center gap-[-0.8rem] md:gap-[-0.3rem] flex-col items-center group ${

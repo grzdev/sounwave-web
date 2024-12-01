@@ -75,9 +75,23 @@ function Metrics() {
           })),
           topTracks: topTracks.items.map((track) => ({
             name: track.name,
-            albumCover: track.album.images[0]?.url,
-            artists: track.artists.map((artist) => artist.name),
+            albumCover: track.album.images[0]?.url || "/placeholder-image.jpg",
+            artists: track.artists.map((artist) => artist.name) || [
+              "Unknown Artist",
+            ],
+            releaseDate: new Intl.DateTimeFormat("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            }).format(new Date(track.album.release_date)),
+            plays: track.popularity || 0,
+            performers:
+              track.artists.map((artist) => artist.name).join(", ") ||
+              "Unknown",
+            writers: "Unknown", // Placeholder
+            producers: "Unknown", // Placeholder
           })),
+
           topArtists: topArtists.items.map((artist) => ({
             name: artist.name,
             image: artist.images[0]?.url,
@@ -103,7 +117,7 @@ function Metrics() {
     <div className="bg-black text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
       <div className="flex items-center justify-center w-full md:w-[70rem]">
         {userInfo && (
-          <div className="flex w-full justify-between items-center px-[1rem] md:px-[3rem]">
+          <div className="flex w-full justify-between items-center px-[1rem] sm:px-[3rem] md:px-[3rem]">
             <Image
               src={userInfo.images?.[0]?.url || "/default-profile.png"}
               alt="Profile"
@@ -121,7 +135,7 @@ function Metrics() {
       </div>
 
       {loading ? (
-        <div className="w-full flex justify-center items-center py-[2rem] ] md:py-[5rem]">
+        <div className="w-full flex justify-center items-center py-[2rem] md:py-[5rem] ">
           <Loader />
         </div>
       ) : spotifyData ? (
@@ -140,7 +154,7 @@ function Metrics() {
       )}
 
       {/* Navbar */}
-      <div className="fixed bottom-0 flex justify-center items-center w-full z-50">
+      <div className="fixed bottom-0 flex justify-center items-center w-full">
         <Navbar />
       </div>
     </div>
