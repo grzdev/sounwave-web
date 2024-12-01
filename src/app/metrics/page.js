@@ -114,7 +114,7 @@ function Metrics() {
   }, [accessToken]);
 
   return (
-    <div className="bg-black text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
+    <div className="bg-black h-screen overflow-y-auto text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
       <div className="flex items-center justify-center w-full md:w-[70rem]">
         {userInfo && (
           <div className="flex w-full justify-between items-center px-[1rem] sm:px-[3rem] md:px-[3rem]">

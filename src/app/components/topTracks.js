@@ -76,18 +76,18 @@ function TopTracks({ topTracks }) {
               <h1 className="text-[1.3rem] md:text-[1.7rem] font-bold">
                 {selectedTrack.name}
               </h1>
-              <h2 className="text-[1.1rem] md:text-[1.2rem] text-gray-200 font-medium">
+              <h2 className="text-[1.1rem] w-[10rem] md:w-full text-center md:text-start md:text-[1.2rem] text-gray-200 font-medium">
                 {selectedTrack.artists.join(", ")}
               </h2>
-              <div className="flex w-full justify-between flex-row mt-[1.2rem] md:mt-[0.8rem]">
-                <h1 className="text-[1.1rem] text-gray-200 font-medium">
+              <div className="flex md:w-full gap-[8rem] md:justify-between flex-row mt-[1.2rem] md:mt-[0.8rem]">
+                <h1 className="text-[1rem] md:text-[1.1rem] text-gray-200 font-medium">
                   {selectedTrack.plays} plays
                 </h1>
-                <h1 className="text-[1.1rem] text-gray-200 font-medium">
+                <h1 className="text-[1rem] md:text-[1.1rem] text-gray-200 font-medium">
                   {selectedTrack.releaseDate}
                 </h1>
               </div>
-              <div className="w-[18rem] h-[14.8rem] md:w-[25rem] md:h-[14.5rem] p-[1rem] bg-[#2d3038] mt-[1rem] md:mt-[0.8rem] flex justify-center flex-col gap-[1rem] rounded-xl">
+              <div className="w-[18rem] h-[14.8rem] md:w-[25rem] md:h-[14.5rem] p-[1rem] bg-[#2d3038] mt-[0.6rem] md:mt-[0.8rem] flex justify-center flex-col gap-[1rem] rounded-xl">
                 <div className="flex flex-col">
                   <h1 className="font-medium text-[1.1rem]">Performed by</h1>
                   <h1 className="text-gray-400 font-medium">
