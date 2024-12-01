@@ -114,7 +114,7 @@ function Metrics() {
   }, [accessToken]);
 
   return (
-    <div className="bg-black h-screen overflow-y-auto text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
+    <div className="bg-black h-screen md:h-auto overflow-y-auto text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
       <div className="flex items-center justify-center w-full md:w-[70rem]">
         {userInfo && (
           <div className="flex w-full justify-between items-center px-[1rem] sm:px-[3rem] md:px-[3rem]">
@@ -135,7 +135,7 @@ function Metrics() {
       </div>
 
       {loading ? (
-        <div className="w-full flex justify-center items-center py-[2rem] md:py-[5rem] ">
+        <div className="w-full flex md:justify-center md:items-center px-[1rem]  py-[2rem] md:py-[5rem] ">
           <Loader />
         </div>
       ) : spotifyData ? (

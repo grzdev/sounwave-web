@@ -79,7 +79,7 @@ function TopTracks({ topTracks }) {
               <h2 className="text-[1.1rem] w-[10rem] md:w-full text-center md:text-start md:text-[1.2rem] text-gray-200 font-medium">
                 {selectedTrack.artists.join(", ")}
               </h2>
-              <div className="flex md:w-full gap-[8rem] md:justify-between flex-row mt-[1.2rem] md:mt-[0.8rem]">
+              <div className="flex w-[17rem] md:w-full justify-between flex-row mt-[1.2rem] md:mt-[0.8rem]">
                 <h1 className="text-[1rem] md:text-[1.1rem] text-gray-200 font-medium">
                   {selectedTrack.plays} plays
                 </h1>
