@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import RecordingButton from "../components/RecordingButton";
 import SongInfo from "../components/SongDiv";
+import AudioRecorder from "../components/AudioRecorder";
 
 function Lysa() {
   const [icon, setIcon] = useState("lucide:ear");
