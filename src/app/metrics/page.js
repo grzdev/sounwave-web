@@ -124,7 +124,6 @@ function Metrics() {
               className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] rounded-full"
               width={70}
               height={60}
-              cl
             />
 
             <h1 className="text-center text-[1.7rem] md:text-[2.5rem] font-bold bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
