@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Image from "next/image";
 import Modal from "./Modal";
@@ -31,7 +32,7 @@ function TopArtists({ topArtists }) {
             className="flex flex-col justify-between items-start w-[11rem] h-[16rem] gap-[1rem] shrink-0 cursor-pointer"
             onClick={() => openModal(artist)}
           >
-            <Image
+            <img
               src={artist.image}
               alt={artist.name}
               width={200}

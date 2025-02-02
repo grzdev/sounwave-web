@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Image from "next/image";
 import Modal from "./Modal";
@@ -30,7 +31,7 @@ function RecentlyPlayed({ recentlyPlayed }) {
             className="flex flex-col items-start cursor pointer w-[11rem] gap-[0.6rem] md:gap-[1.5rem] shrink-0"
             onClick={() => openModal(track)}
           >
-            <Image
+            <img
               src={track.albumCover}
               alt={`${track.name} album cover`}
               width={160}

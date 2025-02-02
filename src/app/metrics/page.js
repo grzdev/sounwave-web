@@ -1,5 +1,5 @@
 "use client";
-
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import TopTracks from "../components/topTracks";
@@ -118,7 +118,7 @@ function Metrics() {
       <div className="flex items-center justify-center w-full md:w-[70rem]">
         {userInfo && (
           <div className="flex w-full justify-between items-center px-[1rem] sm:px-[3rem] md:px-[3rem]">
-            <Image
+            <img
               src={userInfo.images?.[0]?.url || "/default-profile.png"}
               alt="Profile"
               className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] rounded-full"

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Image from "next/image";
 import Modal from "./Modal";
@@ -44,7 +45,7 @@ function TopTracks({ topTracks }) {
             className="flex flex-col items-start w-[11rem] shrink-0 cursor-pointer"
             onClick={() => openModal(track)}
           >
-            <Image
+            <img
               src={track.albumCover}
               alt={`${track.name} album cover`}
               width={160}
