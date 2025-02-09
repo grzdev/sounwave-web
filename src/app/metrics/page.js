@@ -9,6 +9,7 @@ import TopGenres from "../components/topGenres";
 import Loader from "../components/loader";
 import Image from "next/image";
 import Modal from "../components/Modal";
+import Logo from "../assets/images/logo6.png";
 
 const API_ENDPOINT = process.env.NEXT_PUBLIC_SPOTIFY_API_ENDPOINT;
 
@@ -116,7 +117,7 @@ function Metrics() {
   return (
     <div className="bg-black h-screen md:h-auto overflow-y-auto text-white w-full py-[2rem] flex flex-col md:overflow-x-hidden md:justify-center md:items-center">
       <div className="flex items-center justify-center w-full md:w-[70rem]">
-        {userInfo && (
+        {/* {userInfo && (
           <div className="flex w-full justify-between items-center px-[1rem] sm:px-[3rem] md:px-[3rem]">
             <img
               src={userInfo.images?.[0]?.url || "/default-profile.png"}
@@ -130,7 +131,8 @@ function Metrics() {
               {userInfo.display_name || "Your"}&apos;s metrics
             </h1>
           </div>
-        )}
+        )} */}
+        <Image src={Logo} alt="" className="w-[6rem] h-[5rem] rounded-full" />
       </div>
 
       {loading ? (
@@ -142,7 +144,7 @@ function Metrics() {
           <TopTracks topTracks={spotifyData.topTracks} />
           <TopArtists topArtists={spotifyData.topArtists} />
           <RecentlyPlayed recentlyPlayed={spotifyData.recentlyPlayed} />
-          <TopGenres topGenres={spotifyData.topGenres} />
+          {/* <TopGenres topGenres={spotifyData.topGenres} /> */}
         </div>
       ) : (
         <div className="w-full h-screen flex justify-center items-center">
